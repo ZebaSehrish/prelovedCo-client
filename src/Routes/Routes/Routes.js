@@ -2,11 +2,12 @@ import { createBrowserRouter } from "react-router-dom";
 import Blogs from "../../Pages/Blogs/Blogs";
 import Categories from "../../Pages/Categories/Categories";
 import CategoryDetails from "../../Pages/Categories/CategoryDetails";
-import Dashboard from "../../Pages/Dashboard/Dashboard";
+import Dashboard from "../../Pages/Dashboard/Dashboard/Dashboard";
 import Home from "../../Pages/Home/Home/Home";
 import Main from "../../Pages/Layout/Main";
 import Login from "../../Pages/Login/Login";
 import SignUp from "../../Pages/SignUp/SignUp";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 export const router = createBrowserRouter([
     {
@@ -26,10 +27,6 @@ export const router = createBrowserRouter([
                 element: <SignUp></SignUp>
             },
             {
-                path: '/categories',
-                element: <Categories></Categories>
-            },
-            {
                 path: '/category/:id',
                 element: <CategoryDetails></CategoryDetails>,
                 loader: () => fetch('category.json')
@@ -40,10 +37,43 @@ export const router = createBrowserRouter([
                 element: <Blogs></Blogs>
             },
             {
-                path: '/dashboard',
+                path: '/myOrders',
+                element: <Dashboard></Dashboard>
+            },
+            {
+                path: '/addProducts',
+                element: <Dashboard></Dashboard>
+            },
+            {
+                path: '/myProducts',
+                element: <Dashboard></Dashboard>
+            },
+            {
+                path: '/myCustomers',
+                element: <Dashboard></Dashboard>
+            },
+            {
+                path: '/allCustomers',
+                element: <Dashboard></Dashboard>
+            },
+            {
+                path: '/allSellers',
+                element: <Dashboard></Dashboard>
+            },
+            {
+                path: '/reportedItems',
                 element: <Dashboard></Dashboard>
             },
 
-        ]
-    }
+        ],
+
+    },
+    {
+        path: '/categories',
+        element: <PrivateRoute><Categories></Categories></PrivateRoute>
+    },
+    {
+        path: '/dashboard',
+        element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>
+    },
 ])

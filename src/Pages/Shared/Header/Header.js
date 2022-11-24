@@ -1,22 +1,35 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import { AiOutlineUser } from 'react-icons/ai';
 import { BiShoppingBag } from 'react-icons/bi';
 import Home from '../../Home/Home/Home';
+import { AuthContext } from '../../../contexts/AuthProvider';
 
 const Header = () => {
+    const { user, logOut } = useContext(AuthContext);
+
+    const handleLogOut = () => {
+        logOut()
+            .then(() => { })
+            .catch(error => console.log(error))
+    }
+
     const menuItems =
         <React.Fragment>
             <li><Link to='/'>Home</Link></li>
             <li><Link to='about'>Blogs</Link></li>
-            <>
-                <li><Link to='/dashboard'>Dashboard</Link></li>
-                <li><button>Log Out</button></li>
-            </>
-
-            <li><Link to='login'><AiOutlineUser />Login </Link></li>
-            <li><Link><BiShoppingBag /></Link></li>
-
+            {
+                user?.uid ?
+                    <>
+                        <li><Link to='/dashboard'>Dashboard</Link></li>
+                        <li><button onClick={handleLogOut}>Log Out</button></li>
+                        <li><Link><BiShoppingBag /></Link></li>
+                    </>
+                    :
+                    <>
+                        <li><Link to='login'><AiOutlineUser />Login </Link></li>
+                    </>
+            }
         </React.Fragment>
     return (
         <div className="navbar bg-base-100 p-5 flex sm:justify-between lg:justify-center">
