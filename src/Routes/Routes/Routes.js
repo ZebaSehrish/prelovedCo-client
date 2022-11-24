@@ -27,14 +27,18 @@ export const router = createBrowserRouter([
                 element: <SignUp></SignUp>
             },
             {
-                path: '/category/:id',
-                element: <CategoryDetails></CategoryDetails>,
-                loader: () => fetch('category.json')
-
-            },
-            {
                 path: '/blogs',
                 element: <Blogs></Blogs>
+            },
+            {
+                path: '/categories',
+                element: <Categories></Categories>
+            },
+
+            {
+                path: '/category/:id',
+                element: <PrivateRoute><CategoryDetails></CategoryDetails></PrivateRoute>,
+                loader: ({ params }) => fetch(`http://localhost:5000/categoryDetails?category_id=${params.id}`)
             },
             {
                 path: '/myOrders',
@@ -68,10 +72,7 @@ export const router = createBrowserRouter([
         ],
 
     },
-    {
-        path: '/categories',
-        element: <PrivateRoute><Categories></Categories></PrivateRoute>
-    },
+
     {
         path: '/dashboard',
         element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>

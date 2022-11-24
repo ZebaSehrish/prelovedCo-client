@@ -1,13 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
+import BookModal from './BookModal/BookModal';
+import CategoryDetail from './CategoryDetail';
 
 const CategoryDetails = () => {
-    const details = useLoaderData();
-    return (
-        <div>
-            {details.length}
+    const { bookItem, setBookItem } = useState(null);
+    const { category_id } = useLoaderData();
 
-        </div>
+    return (
+        <section>
+            <div>
+                {/* {
+                    categoryDetails.map(categoryDetail => <CategoryDetail
+                        key={categoryDetail._id}
+                        categoryDetail={categoryDetail}
+                        setBookItem={setBookItem}
+                    ></CategoryDetail>)
+                } */}
+            </div>
+            {
+                <BookModal
+                    bookItem={bookItem}
+                ></BookModal>
+            }
+        </section >
     );
 };
 
