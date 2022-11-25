@@ -4,7 +4,6 @@ import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider';
-import Loading from '../../Shared/Loading/Loading';
 
 const AddProducts = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -15,9 +14,9 @@ const AddProducts = () => {
     const navigate = useNavigate();
 
     const handleAddProduct = data => {
-        const image = data.image[0];
+        const img = data.img[0];
         const formData = new FormData();
-        formData.append('image', image);
+        formData.append('image', img);
         const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`;
         fetch(url, {
             method: 'POST',
@@ -35,6 +34,7 @@ const AddProducts = () => {
                         // date,
                         year_of_use: data.year,
                         seller: user?.displayName,
+                        email: user?.email,
                         phone: data.phone,
                         location: data.location,
                         category_id: data.category,
