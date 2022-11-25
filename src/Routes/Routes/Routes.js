@@ -3,7 +3,9 @@ import Blogs from "../../Pages/Blogs/Blogs";
 import Categories from "../../Pages/Categories/Categories";
 import CategoryDetails from "../../Pages/Categories/CategoryDetails";
 import Dashboard from "../../Pages/Dashboard/Dashboard/Dashboard";
+import MyOrders from "../../Pages/Dashboard/MyOrders/MyOrders";
 import Home from "../../Pages/Home/Home/Home";
+import DashboardLayout from "../../Pages/Layout/DashboardLayout";
 import Main from "../../Pages/Layout/Main";
 import Login from "../../Pages/Login/Login";
 import SignUp from "../../Pages/SignUp/SignUp";
@@ -37,8 +39,8 @@ export const router = createBrowserRouter([
 
             {
                 path: '/category/:id',
-                element: <PrivateRoute><CategoryDetails></CategoryDetails></PrivateRoute>,
-                loader: ({ params }) => fetch(`http://localhost:5000/categoryDetails?category_id=${params.id}`)
+                element: <CategoryDetails></CategoryDetails>,
+                loader: ({ params }) => fetch(`http://localhost:5000/categoryDetails/${params.id}`)
             },
             {
                 path: '/myOrders',
@@ -72,9 +74,14 @@ export const router = createBrowserRouter([
         ],
 
     },
-
     {
         path: '/dashboard',
-        element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>
+        element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
+        children: [
+            {
+                path: '/dashboard',
+                element: <MyOrders></MyOrders>
+            }
+        ]
     },
 ])

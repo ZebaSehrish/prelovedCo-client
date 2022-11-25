@@ -33,7 +33,7 @@ const CategoryDetail = ({ categoryDetail, setBookItem }) => {
 
                     <div className="card-actions w-full mb-3">
                         <label htmlFor='booking-modal' className='btn btn-primary bg-gradient-to-r from-primary to-secondary text-white uppercase w-full'
-                            onClick={() => setBookItem(CategoryDetail)} >Book Now</label>
+                            onClick={() => setBookItem(categoryDetail)} >Book Now</label>
                         <button className="btn btn-outline text-primary w-full"> <BiHeart />Add to your wishlist</button>
                         <button className="btn btn-outline text-primary w-full"><BsExclamation />Report this Listing</button>
                     </div>
