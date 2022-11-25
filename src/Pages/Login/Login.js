@@ -75,7 +75,6 @@ const Login = () => {
                             <div>
                                 {loginError && <p>{loginError}</p>}
                             </div>
-                            <p className='text-xs'>New to Doctors Portal? <Link to='/signup' className='text-secondary'>Create a new Account</Link></p>
                             <div className="divider">OR</div>
                             <input type="submit" value='Continue With Google' className='btn btn-outline w-full mt-3 ' />
                         </form>

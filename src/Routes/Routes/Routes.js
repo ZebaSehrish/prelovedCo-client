@@ -14,6 +14,7 @@ import DashboardLayout from "../../Pages/Layout/DashboardLayout";
 import Main from "../../Pages/Layout/Main";
 import Login from "../../Pages/Login/Login";
 import SignUp from "../../Pages/SignUp/SignUp";
+import UndefinedRoute from "../../Pages/UndefinedRoute/UndefinedRoute";
 import AdminRoute from "../AdminRoute/AdminRoute";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import SellerRoute from "../SellerRoute/SellerRoute";
@@ -87,4 +88,8 @@ export const router = createBrowserRouter([
             }
         ]
     },
+    {
+        path: '*',
+        element: <UndefinedRoute></UndefinedRoute>
+    }
 ])
