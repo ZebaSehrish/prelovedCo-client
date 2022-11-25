@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider';
-//import useToken from '../../hooks/useToken';
+import useToken from '../../hooks/useToken';
 
 const SignUp = () => {
 
@@ -13,27 +13,31 @@ const SignUp = () => {
     const { createUser, providerLogin, updateUser } = useContext(AuthContext);
 
     const [signUpError, setSignUPError] = useState('');
-    // const [createdUserEmail, setCreatedEmail] = useState('');
-    //const [token] = useToken(createdUserEmail);
+    const [createdUserEmail, setCreatedEmail] = useState('');
+    const [token] = useToken(createdUserEmail);
     const navigate = useNavigate();
 
-    // if (token) {
-    //     navigate('/');
-    // }
+    if (token) {
+        navigate('/');
+    }
 
     const handleSignUp = data => {
         setSignUPError('');
+        // const form = data.target;
+        // const role = form.role.value;
         createUser(data.email, data.password)
             .then(res => {
                 const user = res.user;
                 console.log(user);
                 toast('User Created Successfully.')
                 const userInfo = {
-                    displayName: data.name
+                    displayName: data.name,
+                    role: data.role
                 }
                 updateUser(userInfo)
                     .then(() => {
-                        //saveUser(data.name, data.email);
+                        saveUser(data.name, data.email, data.role);
+                        console.log(saveUser);
                     })
                     .catch(err => console.log(err));
             })
@@ -51,28 +55,28 @@ const SignUp = () => {
                 const user = result.user;
                 console.log(user);
                 navigate('/');
-                //  navigate(from, { replace: true })
+                //navigate(from, { replace: true })
             })
             .catch(error => console.error(error))
 
     }
 
-    // const saveUser = (name, email) => {
-    //     const user = { name, email };
-    //     fetch('http://localhost:5000/users', {
-    //         method: 'POST',
-    //         headers: {
-    //             'content-type': 'application/json'
-    //         },
-    //         body: JSON.stringify(user)
-    //     })
-    //         .then(res => res.json())
-    //         .then(data => {
-    //             // setCreatedEmail(email);
+    const saveUser = (name, email, role) => {
+        const user = { name, email, role };
+        fetch('http://localhost:5000/users', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                setCreatedEmail(email);
 
-    //         })
-    // }
-
+            })
+    }
 
     return (
         <div className='m-10 flex justify-center text-gray-500'>
@@ -101,13 +105,20 @@ const SignUp = () => {
                                 })} placeholder="password" className="input input-bordered w-full" />
                                 {errors.password && <p className='text-red-400'>{errors.password?.message}</p>}
                             </div>
-                            <div className="form-control w-full">
+                            {/* <div className="form-control w-full">
 
                                 <div className='flex items-center p-2 '>
                                     <label className="label"><span className="label-text mr-2">Signing as</span></label>
-                                    <input type="radio" name="radio-1" className="radio" defaultChecked />Customer
-                                    <input type="radio" name="radio-1" className="radio ml-2" />Seller
+                                    <input type="radio" name="role" className="radio" defaultChecked />Customer
+                                    <input type="radio" name="role" className="radio ml-2" />Seller
                                 </div>
+                            </div> */}
+                            <div className="form-control w-full">
+                                <label className="label"><span className="label-text mr-2">Signing as</span></label>
+                                <select {...register('role')} name='role' className="select select-bordered w-full">
+                                    <option value="Customer">Customer</option>
+                                    <option value="Seller">Seller</option>
+                                </select>
                             </div>
                             <input type="submit" value='SIGN UP' className='btn btn-primary w-full mt-5 ' />
                             {signUpError && <p className='text-red-500'>{signUpError}</p>}

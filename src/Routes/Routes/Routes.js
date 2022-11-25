@@ -2,13 +2,17 @@ import { createBrowserRouter } from "react-router-dom";
 import Blogs from "../../Pages/Blogs/Blogs";
 import Categories from "../../Pages/Categories/Categories";
 import CategoryDetails from "../../Pages/Categories/CategoryDetails";
+import AllCustomers from "../../Pages/Dashboard/AllCustomers/AllCustomers";
+import AllSellers from "../../Pages/Dashboard/AllSellers/AllSellers";
 import Dashboard from "../../Pages/Dashboard/Dashboard/Dashboard";
 import MyOrders from "../../Pages/Dashboard/MyOrders/MyOrders";
+import ReportedItems from "../../Pages/Dashboard/ReportedItems/ReportedItems";
 import Home from "../../Pages/Home/Home/Home";
 import DashboardLayout from "../../Pages/Layout/DashboardLayout";
 import Main from "../../Pages/Layout/Main";
 import Login from "../../Pages/Login/Login";
 import SignUp from "../../Pages/SignUp/SignUp";
+import AdminRoute from "../AdminRoute/AdminRoute";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 export const router = createBrowserRouter([
@@ -39,36 +43,8 @@ export const router = createBrowserRouter([
 
             {
                 path: '/category/:id',
-                element: <CategoryDetails></CategoryDetails>,
+                element: <PrivateRoute><CategoryDetails></CategoryDetails></PrivateRoute>,
                 loader: ({ params }) => fetch(`http://localhost:5000/categoryDetails/${params.id}`)
-            },
-            {
-                path: '/myOrders',
-                element: <Dashboard></Dashboard>
-            },
-            {
-                path: '/addProducts',
-                element: <Dashboard></Dashboard>
-            },
-            {
-                path: '/myProducts',
-                element: <Dashboard></Dashboard>
-            },
-            {
-                path: '/myCustomers',
-                element: <Dashboard></Dashboard>
-            },
-            {
-                path: '/allCustomers',
-                element: <Dashboard></Dashboard>
-            },
-            {
-                path: '/allSellers',
-                element: <Dashboard></Dashboard>
-            },
-            {
-                path: '/reportedItems',
-                element: <Dashboard></Dashboard>
             },
 
         ],
@@ -81,6 +57,18 @@ export const router = createBrowserRouter([
             {
                 path: '/dashboard',
                 element: <MyOrders></MyOrders>
+            },
+            {
+                path: '/dashboard/allCustomers',
+                element: <AdminRoute><AllCustomers></AllCustomers></AdminRoute>
+            },
+            {
+                path: '/dashboard/allSellers',
+                element: <AdminRoute> <AllSellers></AllSellers></AdminRoute>
+            },
+            {
+                path: '/dashboard/reportedItems',
+                element: <AdminRoute><ReportedItems></ReportedItems></AdminRoute>
             }
         ]
     },
