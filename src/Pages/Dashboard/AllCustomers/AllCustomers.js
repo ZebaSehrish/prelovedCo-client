@@ -3,31 +3,14 @@ import React from 'react';
 import toast from 'react-hot-toast';
 
 const AllCustomers = () => {
-    const { data: users = [], refetch } = useQuery({
+    const { data: users = [] } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/users')
+            const res = await fetch(`http://localhost:5000/users?role=customer`)
             const data = await res.json();
             return data;
         }
     });
-    const handleMakeAdmin = id => {
-        fetch(`http://localhost:5000/users/admin/${id}`, {
-            method: 'PUT',
-            headers: {
-                authorization: `bearer ${localStorage.getItem('accessToken')}`
-            }
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (data.modifiedCount > 0) {
-                    toast.success('Admin made sucessfully');
-                    refetch();
-                }
-            })
-
-    }
-
 
     return (
         <div>
@@ -39,7 +22,6 @@ const AllCustomers = () => {
                             <th></th>
                             <th>Name</th>
                             <th>Email</th>
-                            <th>Make Admin</th>
                             <th>Delete</th>
                         </tr>
                     </thead>
@@ -49,9 +31,6 @@ const AllCustomers = () => {
                                 <th>{i + 1}</th>
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
-                                <td>{user?.role !== 'admin' && <button
-                                    onClick={() => handleMakeAdmin(user._id)}
-                                    className='btn btn-xs btn-primary'>Make Admin</button>}</td>
                                 <td><button className='btn btn-xs '>Delete</button></td>
                             </tr>)
                         }

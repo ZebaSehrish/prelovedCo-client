@@ -23,8 +23,6 @@ const SignUp = () => {
 
     const handleSignUp = data => {
         setSignUPError('');
-        // const form = data.target;
-        // const role = form.role.value;
         createUser(data.email, data.password)
             .then(res => {
                 const user = res.user;
@@ -116,8 +114,8 @@ const SignUp = () => {
                             <div className="form-control w-full">
                                 <label className="label"><span className="label-text mr-2">Signing as</span></label>
                                 <select {...register('role')} name='role' className="select select-bordered w-full">
-                                    <option value="Customer">Customer</option>
-                                    <option value="Seller">Seller</option>
+                                    <option value="customer">Customer</option>
+                                    <option value="seller">Seller</option>
                                 </select>
                             </div>
                             <input type="submit" value='SIGN UP' className='btn btn-primary w-full mt-5 ' />
