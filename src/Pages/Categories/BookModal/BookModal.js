@@ -9,7 +9,6 @@ const BookModal = ({ bookItem, setBookItem }) => {
     const handleBooking = event => {
         event.preventDefault();
         const form = event.target;
-        const price = form.price.value;
         const cname = form.cname.value;
         const number = form.number.value;
         const email = form.email.value;
@@ -17,7 +16,7 @@ const BookModal = ({ bookItem, setBookItem }) => {
         const booking = {
             img,
             bag: title,
-            price: price,
+            price: resell_price,
             customer: cname,
             email,
             number,
@@ -36,7 +35,7 @@ const BookModal = ({ bookItem, setBookItem }) => {
                 if (data.acknowledged) {
                     setBookItem(null);
                     toast.success('Booking confirmed');
-                    // refetch();
+                    //refetch();
                 }
                 else {
                     toast.error(data.message);
@@ -45,16 +44,20 @@ const BookModal = ({ bookItem, setBookItem }) => {
 
     }
 
+    const handleExit = () => {
+        setBookItem(null);
+    }
+
     return (
         <>
             <input type="checkbox" id="booking-modal" className="modal-toggle" />
             <div className="modal modal-bottom sm:modal-middle">
                 <div className="modal-box relative">
-                    <label htmlFor="booking-modal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+                    <label onClick={handleExit} htmlFor="booking-modal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
                     <h3 className="font-bold text-lg text-center">{title}</h3>
                     <form onSubmit={handleBooking} className='grid gap-3'>
 
-                        <input name='price' type="text" defaultValue={resell_price} disabled className="input input-sm input-bordered w-full " />
+                        <input name='' type="text" defaultValue={resell_price} disabled className="input input-sm input-bordered w-full " />
 
                         <input name='email' type="email" defaultValue={user?.email} disabled placeholder="Email" className="input input-sm input-bordered w-full " />
 

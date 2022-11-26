@@ -47,14 +47,24 @@ const SignUp = () => {
 
     const googleProvider = new GoogleAuthProvider();
 
-    const handleGoogleSignIn = () => {
+    const handleGoogleSignIn = (data) => {
         providerLogin(googleProvider)
             .then(result => {
                 const user = result.user;
                 console.log(user);
-                navigate('/');
-                //navigate(from, { replace: true })
+                const userInfo = {
+                    displayName: user?.displayName,
+                    role: 'customer'
+                }
+                updateUser(userInfo)
+                    .then(() => {
+                        saveUser(user?.email, user?.displayName);
+                        console.log(saveUser);
+                    })
+                    .catch(err => console.log(err));
             })
+            // navigate('/');
+            //navigate(from, { replace: true })
             .catch(error => console.error(error))
 
     }
@@ -103,14 +113,6 @@ const SignUp = () => {
                                 })} placeholder="password" className="input input-bordered w-full" />
                                 {errors.password && <p className='text-red-400'>{errors.password?.message}</p>}
                             </div>
-                            {/* <div className="form-control w-full">
-
-                                <div className='flex items-center p-2 '>
-                                    <label className="label"><span className="label-text mr-2">Signing as</span></label>
-                                    <input type="radio" name="role" className="radio" defaultChecked />Customer
-                                    <input type="radio" name="role" className="radio ml-2" />Seller
-                                </div>
-                            </div> */}
                             <div className="form-control w-full">
                                 <label className="label"><span className="label-text mr-2">Signing as</span></label>
                                 <select {...register('role')} name='role' className="select select-bordered w-full">

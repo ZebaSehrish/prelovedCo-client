@@ -3,8 +3,8 @@ import React, { useEffect, useState } from 'react';
 import Category from './Category';
 
 const Categories = () => {
-    // const [categories, setCategories] = useState([]);
-    const { data: categories = [], refetch, isLoading } = useQuery({
+
+    const { data: categories = [], isLoading } = useQuery({
         queryKey: ['categories'],
         queryFn: async () => {
             const res = await fetch(`http://localhost:5000/categories`)
@@ -20,9 +20,9 @@ const Categories = () => {
             </div>
             <div className='grid gap-2 m-20 grid-cols-1 lg:grid-cols-3'>
                 {
-                    categories.map(category => <Category
-                        key={category.category_id}
-                        category={category}
+                    categories.map(perCategory => <Category
+                        key={perCategory.category_id}
+                        perCategory={perCategory}
                     ></Category>)
                 }
             </div>

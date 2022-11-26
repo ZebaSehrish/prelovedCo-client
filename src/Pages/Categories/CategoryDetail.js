@@ -5,7 +5,7 @@ import { BiHeart } from 'react-icons/bi';
 import { BsExclamation } from 'react-icons/bs';
 
 const CategoryDetail = ({ categoryDetail, setBookItem }) => {
-    const { title, img, original_price, resell_price, year_of_use, date, location, seller, verified } = categoryDetail;
+    const { title, img, original_price, resell_price, year, date, location, seller, verified, status } = categoryDetail;
     return (
         <div className="">
             <div className="hero-content flex-col lg:flex-row">
@@ -16,7 +16,7 @@ const CategoryDetail = ({ categoryDetail, setBookItem }) => {
                             <h2 className=" text-3xl font-bold">{title}</h2>
                             <p>Original Price:BDT.{original_price} </p>
                             <p>Resell Price:BDT.{resell_price}</p>
-                            <p>Used: {year_of_use}</p>
+                            <p>Year of Purchase: {year}</p>
                             <div className='flex '>
                                 <BsPinMap />
                                 <p className='ml-2'>  {location}</p>
@@ -32,8 +32,14 @@ const CategoryDetail = ({ categoryDetail, setBookItem }) => {
                     </div>
 
                     <div className="card-actions w-full mb-3">
-                        <label htmlFor='booking-modal' className='btn btn-primary bg-gradient-to-r from-primary to-secondary text-white uppercase w-full'
-                            onClick={() => setBookItem(categoryDetail)} >Book Now</label>
+                        {
+                            !status ?
+                                <label htmlFor='booking-modal' className='btn btn-primary bg-gradient-to-r from-primary to-secondary text-white uppercase w-full'
+                                    onClick={() => setBookItem(categoryDetail)} >Book Now</label>
+                                :
+                                <label className='btn btn-primary bg-gradient-to-r from-primary to-secondary btn-disabled text-white uppercase w-full'
+                                >Booked</label>
+                        }
                         <button className="btn btn-outline text-primary w-full"> <BiHeart />Add to your wishlist</button>
                         <button className="btn btn-outline text-primary w-full"><BsExclamation />Report this Listing</button>
                     </div>

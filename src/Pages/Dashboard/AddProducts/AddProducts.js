@@ -32,12 +32,13 @@ const AddProducts = () => {
                         original_price: data.price,
                         resell_price: data.rprice,
                         // date,
-                        year_of_use: data.year,
+                        year: data.year,
                         seller: user?.displayName,
                         email: user?.email,
+                        verified: user?.verified,
                         phone: data.phone,
                         location: data.location,
-                        category_id: data.category,
+                        category: data.category,
                         specialty: data.specialty,
                         img: imgData.data.url,
                         description: data.description,
@@ -121,9 +122,9 @@ const AddProducts = () => {
                             <select
                                 {...register('category')}
                                 placeholder='Category' className="select select-sm select-bordered w-full">
-                                <option value="01">Shoulder Bags</option>
-                                <option value="02">Tote Bags</option>
-                                <option value="03">Backpacks</option>
+                                <option value="Shoulder">Shoulder Bags</option>
+                                <option value="Tote">Tote Bags</option>
+                                <option value="Backpacks">Backpacks</option>
                             </select>
                         </div>
                         <div className="form-control w-full">

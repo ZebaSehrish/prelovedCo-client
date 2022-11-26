@@ -35,6 +35,24 @@ const AllSellers = () => {
                 }
             })
     }
+
+    const handleVerify = id => {
+        fetch(`http://localhost:5000/users/admin/${id}`, {
+            method: 'PUT',
+            headers: {
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.modifiedCount > 0) {
+                    toast.success('Verified successfully');
+                    refetch();
+                }
+            })
+
+    }
+
     if (isLoading) {
         return <Loading></Loading>
     }
@@ -42,7 +60,7 @@ const AllSellers = () => {
 
     return (
         <div>
-            <h3 className="text-3xl mb-5">All Customers</h3>
+            <h3 className="text-3xl mb-5">All Sellers</h3>
             <div className="overflow-x-auto">
                 <table className="table w-full">
                     <thead>
@@ -50,7 +68,7 @@ const AllSellers = () => {
                             <th></th>
                             <th>Name</th>
                             <th>Email</th>
-                            <th>Delete</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -59,7 +77,19 @@ const AllSellers = () => {
                                 <th>{i + 1}</th>
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
-                                <td> <label onClick={() => setDeletingUser(user)} htmlFor="confirmation-modal" className="btn btn-xs btn-error">Delete</label></td>
+                                <td>
+                                    {
+                                        (user?.verified === 'yes' &&
+                                            <>
+                                                <button className='btn btn-xs btn-success'>verified</button>
+                                            </>)
+                                        ||
+                                        <button
+                                            onClick={() => handleVerify(user._id)}
+                                            className='btn btn-xs btn-primary'>unverified</button>
+                                    }
+                                    <label onClick={() => setDeletingUser(user)
+                                    } htmlFor="confirmation-modal" className="btn btn-xs btn-error ml-4">Delete</label></td>
                             </tr>)
                         }
                     </tbody>
@@ -75,7 +105,7 @@ const AllSellers = () => {
                     closeModal={closeModal}
                 ></ConfirmationModal>
             }
-        </div>
+        </div >
     );
 };
 

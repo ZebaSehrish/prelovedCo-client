@@ -46,6 +46,26 @@ const MyProducts = () => {
             })
     }
 
+    const handleAvailableProduct = id => {
+        fetch(`http://localhost:5000/users/seller/${id}`, {
+            method: 'PUT',
+            headers: {
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.modifiedCount > 0) {
+                    toast.success('Updated successfully');
+                    refetch();
+                }
+            })
+
+    }
+
+    const handleAd = id => {
+
+    }
 
     if (isLoading) {
         return <Loading></Loading>
@@ -61,9 +81,11 @@ const MyProducts = () => {
                             <th></th>
                             <th></th>
                             <th>Product</th>
+                            <th>Category</th>
                             <th>Price</th>
                             <th>Status</th>
                             <th>Advertisement</th>
+                            <th>Action</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -74,10 +96,24 @@ const MyProducts = () => {
                                 <th>{i + 1}</th>
                                 <td><img className='w-20 squared' src={product.img} alt="" /></td>
                                 <td>{product.title}</td>
+                                <td>{product.category} Bags</td>
                                 <td>BDT. {product.resell_price}</td>
-                                <td><button className='btn btn-sm'>available</button></td>
-                                <td><button className='btn btn-sm'>activate</button></td>
-                                <td> <label onClick={() => setDeletingProduct(product)} htmlFor="confirmation-modal" className="btn btn-sm btn-error">Delete</label></td>
+                                <td>
+                                    {
+                                        (product?.status === 'sold' &&
+                                            <>
+                                                <button className='btn btn-xs btn-error'>sold</button>
+                                            </>)
+                                        ||
+                                        <button onClick={() => handleAvailableProduct(product._id)} className='btn btn-xs btn-success'>available</button>
+                                    }
+                                </td>
+                                <td>
+                                    {
+                                        product?.status !== 'sold' && <button onClick={handleAd} className='btn btn-xs'>activate</button>
+                                    }
+                                </td>
+                                <td> <label onClick={() => setDeletingProduct(product)} htmlFor="confirmation-modal" className="btn btn-xs btn-error">Delete</label></td>
                             </tr>)
                         }
                     </tbody>

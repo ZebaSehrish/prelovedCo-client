@@ -4,14 +4,14 @@ import BookModal from './BookModal/BookModal';
 import CategoryDetail from './CategoryDetail';
 
 const CategoryDetails = () => {
-    const { category_id } = useLoaderData();
+    const { category } = useLoaderData();
     const [bookItem, setBookItem] = useState(null);
     const [categoryDetails, setCategoryDetails] = useState([]);
     useEffect(() => {
-        fetch(`http://localhost:5000/categoryDetails?category_id=${category_id}`)
+        fetch(`http://localhost:5000/categoryDetails?category=${category}`)
             .then(res => res.json())
             .then(data => setCategoryDetails(data))
-    }, [category_id])
+    }, [category])
 
 
     return (

@@ -3,8 +3,8 @@ import { BsArrowRightCircle } from 'react-icons/bs'
 import { GiShoulderBag } from 'react-icons/gi';
 import { Link } from 'react-router-dom';
 
-const Category = ({ category }) => {
-    const { category_id, title, description } = category;
+const Category = ({ perCategory }) => {
+    const { title, description, category } = perCategory;
     return (
         <div className="card bg-primary shadow-xl text-center text-rose-500">
             <div className="m-10">
@@ -14,7 +14,7 @@ const Category = ({ category }) => {
                 </div>
                 <p className='font-mono'>{description}</p>
                 <div className="card-actions justify-center ">
-                    <Link to={`category/${category_id}`}><button className="btn btn-link flex items-center text-white text-xl font-bold ">Check Out now<BsArrowRightCircle className='ml-2' /></button></Link>
+                    <Link to={`/category/${category}`} ><button className="btn btn-link flex items-center text-white text-xl font-bold ">Check Out now<BsArrowRightCircle className='ml-2' /></button></Link>
                 </div>
             </div>
         </div>
