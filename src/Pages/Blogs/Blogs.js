@@ -7,7 +7,7 @@ const Blogs = () => {
             <div className="hero-overlay bg-opacity-60"></div>
             <div className="hero-content text-neutral-content" >
                 <div className="">
-                    <h1 className="mb-5 text-5xl font-bold" style={{ 'font-family': 'cursive' }}>Our Blog</h1>
+                    <h1 className="mb-5 text-5xl text-primary font-bold" style={{ 'font-family': 'cursive' }}>Our Blog</h1>
                     <p className="mb-5">Catch Our Latest Blogs on technology and Libraries</p>
                     <div className='grid gap-5 grid-cols-1 lg:grid-cols-2 '>
                         <div className="card bg-base-100 rounded-sm shadow-xl">

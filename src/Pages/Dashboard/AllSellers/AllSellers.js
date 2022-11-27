@@ -59,25 +59,25 @@ const AllSellers = () => {
 
 
     return (
-        <div>
-            <h3 className="text-3xl mb-5">All Sellers</h3>
-            <div className="overflow-x-auto">
-                <table className="table w-full">
+        <div className='mt-20'>
+            <h3 className="text-4xl text-center mb-5" style={{ 'fontFamily': 'serif' }}>All Sellers</h3>
+            <div className="overflow-x-auto flex justify-center align-center">
+                <table className="table">
                     <thead>
                         <tr>
-                            <th></th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Action</th>
+                            <th className='bg-secondary'></th>
+                            <th className='bg-secondary'>Name</th>
+                            <th className='bg-secondary'>Email</th>
+                            <th className='bg-secondary'>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         {
                             users.map((user, i) => <tr key={user._id}>
-                                <th>{i + 1}</th>
-                                <td>{user.name}</td>
-                                <td>{user.email}</td>
-                                <td>
+                                <th className='bg-primary'>{i + 1}</th>
+                                <td className='bg-primary'>{user.name}</td>
+                                <td className='bg-primary'>{user.email}</td>
+                                <td className='bg-primary'>
                                     {
                                         (user?.verified === 'yes' &&
                                             <>

@@ -23,28 +23,28 @@ const MyOrders = () => {
     })
 
     return (
-        <div>
-            <h3 className="text-3xl mb-5">My Products</h3>
-            <div className="overflow-x-auto">
-                <table className="table w-full">
+        <div className='mt-20'>
+            <h3 className="text-4xl text-center mb-5" style={{ 'fontFamily': 'serif' }}>My Products</h3>
+            <div className="overflow-x-auto flex justify-center align-center">
+                <table className="table">
                     <thead>
                         <tr>
-                            <th></th>
-                            <th>Name</th>
-                            <th>Item</th>
-                            <th>Price</th>
-                            <th>Payment Status</th>
+                            <th className='bg-secondary'></th>
+                            <th className='bg-secondary'>Name</th>
+                            <th className='bg-secondary'>Item</th>
+                            <th className='bg-secondary'>Price</th>
+                            <th className='bg-secondary'>Payment Status</th>
                         </tr>
                     </thead>
                     <tbody>
                         {
                             bookings &&
                             bookings?.map((booking, i) => <tr key={booking._id}>
-                                <th>{i + 1}</th>
-                                <td><img className='w-20 squared' src={booking.img} alt="" /></td>
-                                <td>{booking.bag}</td>
-                                <td>BDT. {booking.price}</td>
-                                <td>
+                                <th className='bg-primary'>{i + 1}</th>
+                                <td className='bg-primary'><img className='w-20 squared' src={booking.img} alt="" /></td>
+                                <td className='bg-primary'>{booking.bag}</td>
+                                <td className='bg-primary'>$ {booking.price}</td>
+                                <td className='bg-primary'>
                                     {
                                         booking.price && !booking.paid && <Link
                                             to={`/dashboard/payment/${booking._id}`}

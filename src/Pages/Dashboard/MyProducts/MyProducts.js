@@ -9,6 +9,11 @@ import Loading from '../../Shared/Loading/Loading';
 const MyProducts = () => {
     const { user } = useContext(AuthContext);
     const [deletingProduct, setDeletingProduct] = useState(null);
+    const [clicked, setClicked] = useState(false);
+
+    if (clicked) {
+
+    }
 
     const closeModal = () => {
         setDeletingProduct(null);
@@ -46,7 +51,7 @@ const MyProducts = () => {
             })
     }
 
-    const handleAvailableProduct = id => {
+    const handleAd = id => {
         fetch(`http://localhost:5000/users/seller/${id}`, {
             method: 'PUT',
             headers: {
@@ -56,15 +61,10 @@ const MyProducts = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.modifiedCount > 0) {
-                    toast.success('Updated successfully');
+                    toast.success('Advertised successfully');
                     refetch();
                 }
             })
-
-    }
-
-    const handleAd = id => {
-
     }
 
     if (isLoading) {
@@ -72,48 +72,50 @@ const MyProducts = () => {
     }
 
     return (
-        <div>
-            <h3 className="text-3xl mb-5">My Products</h3>
-            <div className="overflow-x-auto">
-                <table className="table w-full">
-                    <thead>
+        <div className='mt-20'>
+            <h3 className="text-4xl text-center mb-5" style={{ 'fontFamily': 'serif' }}>My Products</h3>
+            <div className="overflow-x-auto flex justify-center align-center ">
+                <table className="table ">
+                    <thead >
                         <tr>
-                            <th></th>
-                            <th></th>
-                            <th>Product</th>
-                            <th>Category</th>
-                            <th>Price</th>
-                            <th>Status</th>
-                            <th>Advertisement</th>
-                            <th>Action</th>
-                            <th></th>
+                            <th className='bg-secondary'></th>
+                            <th className='bg-secondary'></th>
+                            <th className='bg-secondary'>Product</th>
+                            <th className='bg-secondary'>Category</th>
+                            <th className='bg-secondary'>Price</th>
+                            <th className='bg-secondary'>Status</th>
+                            <th className='bg-secondary'>Advertisement</th>
+                            <th className='bg-secondary'>Action</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody className='bg-primary'>
                         {
                             products &&
-                            products?.map((product, i) => <tr key={product._id}>
-                                <th>{i + 1}</th>
-                                <td><img className='w-20 squared' src={product.img} alt="" /></td>
-                                <td>{product.title}</td>
-                                <td>{product.category} Bags</td>
-                                <td>BDT. {product.resell_price}</td>
-                                <td>
+                            products?.map((product, i) => <tr className=''
+                                key={product._id}>
+                                <th className='bg-primary'>{i + 1}</th>
+                                <td className='bg-primary'><img className='w-20 squared' src={product.img} alt="" /></td>
+                                <td className='bg-primary'>{product.title}</td>
+                                <td className='bg-primary'>{product.category} Bags</td>
+                                <td className='bg-primary'>${product.resell_price}</td>
+                                <td className='bg-primary'>
                                     {
-                                        (product?.status === 'sold' &&
+
+                                        (product?.advertisement === true &&
                                             <>
-                                                <button className='btn btn-xs btn-error'>sold</button>
+                                                <button onClick={() => setClicked(true)} className='btn btn-xs btn-info'>activated</button>
                                             </>)
                                         ||
-                                        <button onClick={() => handleAvailableProduct(product._id)} className='btn btn-xs btn-success'>available</button>
+                                        <button onClick={() => handleAd(product._id)} className='btn btn-xs'>activate</button>
+
                                     }
                                 </td>
-                                <td>
+                                <td className='bg-primary'>
                                     {
-                                        product?.status !== 'sold' && <button onClick={handleAd} className='btn btn-xs'>activate</button>
+                                        <button className='btn btn-xs btn-success'>available</button>
                                     }
                                 </td>
-                                <td> <label onClick={() => setDeletingProduct(product)} htmlFor="confirmation-modal" className="btn btn-xs btn-error">Delete</label></td>
+                                <td className='bg-primary' s> <label onClick={() => setDeletingProduct(product)} htmlFor="confirmation-modal" className="btn btn-xs btn-error">Delete</label></td>
                             </tr>)
                         }
                     </tbody>
@@ -129,7 +131,7 @@ const MyProducts = () => {
                     closeModal={closeModal}
                 ></ConfirmationModal>
             }
-        </div>
+        </div >
     );
 };
 
