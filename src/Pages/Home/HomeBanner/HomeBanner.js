@@ -12,7 +12,7 @@ const HomeBanner = () => {
                 <div className="hero-overlay bg-opacity-60"></div>
                 <div className="hero-content text-center text-neutral-content">
                     <div className="max-w-md" style={{ 'fontFamily': 'cursive' }}>
-                        <h1 className="mb-5 text-5xl font-bold" >Shop Now</h1>
+                        <h1 className="mb-5 text-5xl font-bold text-primary" >Shop Now</h1>
                         <p className="mb-5 text-2xl font-medium ">Award-winning, sustainable boutique of non branded & designer preloved bags.</p>
                     </div>
                 </div>

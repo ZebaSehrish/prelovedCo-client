@@ -9,11 +9,6 @@ import Loading from '../../Shared/Loading/Loading';
 const MyProducts = () => {
     const { user } = useContext(AuthContext);
     const [deletingProduct, setDeletingProduct] = useState(null);
-    const [clicked, setClicked] = useState(false);
-
-    if (clicked) {
-
-    }
 
     const closeModal = () => {
         setDeletingProduct(null);
@@ -103,7 +98,7 @@ const MyProducts = () => {
 
                                         (product?.advertisement === true &&
                                             <>
-                                                <button onClick={() => setClicked(true)} className='btn btn-xs btn-info'>activated</button>
+                                                <button className='btn btn-xs btn-info'>activated</button>
                                             </>)
                                         ||
                                         <button onClick={() => handleAd(product._id)} className='btn btn-xs'>activate</button>
@@ -111,9 +106,8 @@ const MyProducts = () => {
                                     }
                                 </td>
                                 <td className='bg-primary'>
-                                    {
-                                        <button className='btn btn-xs btn-success'>available</button>
-                                    }
+
+                                    <button className='btn btn-xs btn-success'>available</button>
                                 </td>
                                 <td className='bg-primary' s> <label onClick={() => setDeletingProduct(product)} htmlFor="confirmation-modal" className="btn btn-xs btn-error">Delete</label></td>
                             </tr>)

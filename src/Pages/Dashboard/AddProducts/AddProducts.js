@@ -5,10 +5,12 @@ import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider';
 import { IoHappyOutline } from 'react-icons/io5';
+import useVerified from '../../../hooks/useVerified';
 
 const AddProducts = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const { user } = useContext(AuthContext);
+    const [isVerified] = useVerified(user?.email);
 
     const imageHostKey = process.env.REACT_APP_imgbb_key;
 
@@ -36,7 +38,7 @@ const AddProducts = () => {
                         year: data.year,
                         seller: user?.displayName,
                         email: user?.email,
-                        verified: user?.verified,
+                        verified: isVerified && 'yes',
                         phone: data.phone,
                         location: data.location,
                         category: data.category,
@@ -69,25 +71,25 @@ const AddProducts = () => {
     return (
 
 
-        <div className='flex justify-center text-gray-500'>
+        <div className='flex justify-center text-gray-500 m-5'>
             <div className='grid grid-cols-1 lg:grid-cols-2'>
                 <div className="flex items-center justify-center">
                     <div className=''>
                         <div>
                             <h2 className="text-4xl text-center" style={{ 'fontFamily': 'serif' }}>Add a Product</h2>
                             <div className='flex items-center text-secondary'>
-                                <p className=' mr-2 font-thin'>& sell more and get verified</p>
+                                <p className='mr-2 font-thin'>& sell more and get verified</p>
                                 <IoHappyOutline />
                             </div>
                         </div>
                     </div>
                     <div className="divider lg:divider-horizontal"></div>
                 </div>
-                <div className='h-[600px] flex justify-center items-center'>
-                    <div className=' mt-16'>
+                <div className='h-[500px] flex justify-center items-center'>
+                    <div className='mt-16'>
                         <p className='text-secondary font-thin'>Provide all the details</p>
                         <form onSubmit={handleSubmit(handleAddProduct)} className='bg-primary lg:p-3 rounded-md'>
-                            <div className='grid gap-2 grid-cols-2 m-1 p-2'>
+                            <div className='grid gap-2 grid-cols-2'>
                                 <div className="form-control w-full">
                                     <label className="label"><span className="label-text">Name</span></label>
                                     <input type="text" {...register("name", { required: 'name is required' })} placeholder="name" className="input input-sm input-bordered w-full" />
