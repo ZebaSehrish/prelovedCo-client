@@ -38,7 +38,7 @@ const Login = () => {
     }
 
     return (
-        <div className='m-10 flex justify-center text-gray-500'>
+        <div className='m-5 flex justify-center text-gray-500'>
             <div className='grid grid-cols-1 lg:grid-cols-2'>
                 <div className="flex items-center justify-center">
                     <div className='grid grid-cols-1'>
@@ -51,7 +51,7 @@ const Login = () => {
                     </div>
                     <div className="divider sm:divider-vertical lg:divider-horizontal"></div>
                 </div>
-                <div className='h-[800px] flex justify-center items-center'>
+                <div className='h-[600px] flex justify-center items-center'>
                     <div className=' p-3'>
                         <h2 className='text-3xl text-center'>Already have an account?</h2>
                         <p className='text-secondary font-thin'>Login</p>

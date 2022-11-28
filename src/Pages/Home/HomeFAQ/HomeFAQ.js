@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 const HomeFAQ = () => {
     return (
         <div className=' bg-gray-700 text-gray-700 pb-10'>
-            <div className="text-center text-white text-3xl font-bold" style={{ 'font-family': 'cursive' }}>
+            <div className="text-center text-white text-3xl font-bold" style={{ 'fontFamily': 'cursive' }}>
                 <p>__</p>
                 <h2 className='m-3'>Sell to us</h2>
             </div>

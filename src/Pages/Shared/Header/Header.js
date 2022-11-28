@@ -4,9 +4,13 @@ import { AiOutlineUser } from 'react-icons/ai';
 import { BiShoppingBag } from 'react-icons/bi';
 import Home from '../../Home/Home/Home';
 import { AuthContext } from '../../../contexts/AuthProvider';
+import useAdmin from '../../../hooks/useAdmin';
+import useSeller from '../../../hooks/useSeller';
 
 const Header = () => {
     const { user, logOut } = useContext(AuthContext);
+    const [isAdmin] = useAdmin(user?.email);
+    const [isSeller] = useSeller(user?.email);
 
     const handleLogOut = () => {
         logOut()
@@ -19,16 +23,32 @@ const Header = () => {
             <li><Link to='/'>Home</Link></li>
             <li><Link to='/blogs'>Blogs</Link></li>
             {
-                user?.uid ?
+                (user?.uid && !isAdmin && !isSeller &&
                     <>
-                        <li><Link to='/dashboard'>Dashboard</Link></li>
+                        <li><Link to='/dashboard/myOrders'>Dashboard</Link></li>
                         <li><button onClick={handleLogOut}>Log Out</button></li>
                         <li><Link><BiShoppingBag /></Link></li>
-                    </>
-                    :
+                    </>)
+                ||
+                (isAdmin &&
+
                     <>
-                        <li><Link to='login'><AiOutlineUser />Login </Link></li>
+                        <li><Link to='/dashboard/allSellers'>Dashboard</Link></li>
+                        <li><button onClick={handleLogOut}>Log Out</button></li>
                     </>
+                )
+                ||
+                (isSeller &&
+
+                    <>
+                        <li><Link to='/dashboard/myProducts'>Dashboard</Link></li>
+                        <li><button onClick={handleLogOut}>Log Out</button></li>
+                    </>
+                )
+                ||
+                <>
+                    <li><Link to='login'><AiOutlineUser />Login </Link></li>
+                </>
             }
         </React.Fragment>
     return (

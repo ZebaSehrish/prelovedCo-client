@@ -13,12 +13,11 @@ const Blogs = () => {
                         <div className="card bg-base-100 rounded-sm shadow-xl">
                             <div className="card-body">
                                 <h2 className='text-xl font-serif text-gray-600'>What are the different ways to manage a state in a react application?</h2>
-                                <p className='text-md text-gray-600 font-thin' >There are four main types of state needed to properly manage in the React apps:
-
-                                    <br /> Local state
-                                    <br /> Global state
-                                    <br /> Server state
-                                    URL state</p>
+                                <p className='text-md text-gray-600 font-thin' >Managing state is a crucial skill in React because it allows you to make interactive components and dynamic web applications.There are few ways to manage state properly in the React apps:
+                                    <br /> Create custom hooks to use in various places
+                                    <br /> Use useReducer for Complex State
+                                    <br /> set Global state
+                                </p>
                             </div>
                         </div>
                         <div className="card bg-base-100 rounded-sm shadow-xl">
@@ -36,7 +35,10 @@ const Blogs = () => {
                         <div className="card bg-base-100 rounded-sm shadow-xl">
                             <div className="card-body">
                                 <h2 className='text-xl font-serif text-gray-600'>State react vs angular vs vue?</h2>
-                                <p className='text-md text-gray-600 font-thin' ></p>
+                                <p className='text-md text-gray-600 font-thin' >
+                                    ReactJS is a declarative, efficient, and flexible JavaScript library for building reusable UI components. Angular is a development platform, built on TypeScript . Vue builds on top of standard HTML, CSS, and JavaScript and provides a declarative and component-based programming model that helps you efficiently develop user interfaces, be they simple or complex.
+                                    It is an open-source, component-based front end library responsible only for the view layer of the application.
+                                </p>
                             </div>
                         </div>
 

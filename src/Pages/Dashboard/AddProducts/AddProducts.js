@@ -72,9 +72,9 @@ const AddProducts = () => {
 
 
         <div className='flex justify-center text-gray-500 m-5'>
-            <div className='grid grid-cols-1 lg:grid-cols-2'>
+            <div className='grid gap-0 grid-cols-1 lg:grid-cols-2'>
                 <div className="flex items-center justify-center">
-                    <div className=''>
+                    <div>
                         <div>
                             <h2 className="text-4xl text-center" style={{ 'fontFamily': 'serif' }}>Add a Product</h2>
                             <div className='flex items-center text-secondary'>
@@ -85,8 +85,8 @@ const AddProducts = () => {
                     </div>
                     <div className="divider lg:divider-horizontal"></div>
                 </div>
-                <div className='h-[500px] flex justify-center items-center'>
-                    <div className='mt-16'>
+                <div className='h-[500px]  flex justify-center items-center  mt-14'>
+                    <div className=''>
                         <p className='text-secondary font-thin'>Provide all the details</p>
                         <form onSubmit={handleSubmit(handleAddProduct)} className='bg-primary lg:p-3 rounded-md'>
                             <div className='grid gap-2 grid-cols-2'>
@@ -142,6 +142,7 @@ const AddProducts = () => {
                                         <option value="Backpacks">Backpacks</option>
                                     </select>
                                 </div>
+
                             </div>
                             <div className="form-control w-full">
                                 <label className="label"><span className="label-text">Photo</span></label>

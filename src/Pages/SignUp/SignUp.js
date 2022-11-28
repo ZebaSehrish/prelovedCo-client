@@ -63,8 +63,6 @@ const SignUp = () => {
                     })
                     .catch(err => console.log(err));
             })
-            // navigate('/');
-            //navigate(from, { replace: true })
             .catch(error => console.error(error))
 
     }
@@ -87,9 +85,9 @@ const SignUp = () => {
     }
 
     return (
-        <div className='m-10 flex justify-center text-gray-500'>
+        <div className='m-7 flex justify-center text-gray-500'>
             <div className='grid grid-cols-1 lg:grid-cols-2 '>
-                <div className='h-[800px] flex items-center justify-center lg:justify-end  '>
+                <div className='h-[600px] flex items-center justify-center lg:justify-end  '>
                     <div className='w-96 p-3'>
                         <h2 className='text-4xl text-center text-secondary'>Register </h2>
                         <p className='text-center font-thin'>Please fill in the information below:</p>

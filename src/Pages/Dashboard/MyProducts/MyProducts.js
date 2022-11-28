@@ -67,65 +67,74 @@ const MyProducts = () => {
     }
 
     return (
-        <div className='mt-20'>
-            <h3 className="text-4xl text-center mb-5" style={{ 'fontFamily': 'serif' }}>My Products</h3>
-            <div className="overflow-x-auto flex justify-center align-center ">
-                <table className="table ">
-                    <thead >
-                        <tr>
-                            <th className='bg-secondary'></th>
-                            <th className='bg-secondary'></th>
-                            <th className='bg-secondary'>Product</th>
-                            <th className='bg-secondary'>Category</th>
-                            <th className='bg-secondary'>Price</th>
-                            <th className='bg-secondary'>Status</th>
-                            <th className='bg-secondary'>Advertisement</th>
-                            <th className='bg-secondary'>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody className='bg-primary'>
-                        {
-                            products &&
-                            products?.map((product, i) => <tr className=''
-                                key={product._id}>
-                                <th className='bg-primary'>{i + 1}</th>
-                                <td className='bg-primary'><img className='w-20 squared' src={product.img} alt="" /></td>
-                                <td className='bg-primary'>{product.title}</td>
-                                <td className='bg-primary'>{product.category} Bags</td>
-                                <td className='bg-primary'>${product.resell_price}</td>
-                                <td className='bg-primary'>
-                                    {
-
-                                        (product?.advertisement === true &&
-                                            <>
-                                                <button className='btn btn-xs btn-info'>activated</button>
-                                            </>)
-                                        ||
-                                        <button onClick={() => handleAd(product._id)} className='btn btn-xs'>activate</button>
-
-                                    }
-                                </td>
-                                <td className='bg-primary'>
-
-                                    <button className='btn btn-xs btn-success'>available</button>
-                                </td>
-                                <td className='bg-primary' s> <label onClick={() => setDeletingProduct(product)} htmlFor="confirmation-modal" className="btn btn-xs btn-error">Delete</label></td>
-                            </tr>)
-                        }
-                    </tbody>
-                </table>
-            </div>
+        <div>
             {
-                deletingProduct && <ConfirmationModal
-                    title={`Are you sure you want to delete?`}
-                    message={`If you delete ${deletingProduct.title}. It cannot be undone`}
-                    successAction={handleDeleteProduct}
-                    successButtonName='Delete'
-                    modalData={deletingProduct}
-                    closeModal={closeModal}
-                ></ConfirmationModal>
+                products.length > 0 ?
+                    <div className='mt-20'>
+                        <h3 className="text-4xl text-center mb-5" style={{ 'fontFamily': 'serif' }}>My Products</h3>
+                        <div className="overflow-x-auto flex justify-center align-center ">
+                            <table className="table ">
+                                <thead >
+                                    <tr>
+                                        <th className='bg-secondary'></th>
+                                        <th className='bg-secondary'></th>
+                                        <th className='bg-secondary'>Product</th>
+                                        <th className='bg-secondary'>Category</th>
+                                        <th className='bg-secondary'>Price</th>
+                                        <th className='bg-secondary'>Status</th>
+                                        <th className='bg-secondary'>Advertisement</th>
+                                        <th className='bg-secondary'>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody className='bg-primary'>
+                                    {
+                                        products &&
+                                        products?.map((product, i) => <tr className=''
+                                            key={product._id}>
+                                            <th className='bg-primary'>{i + 1}</th>
+                                            <td className='bg-primary'><img className='w-20 squared' src={product.img} alt="" /></td>
+                                            <td className='bg-primary'>{product.title}</td>
+                                            <td className='bg-primary'>{product.category} Bags</td>
+                                            <td className='bg-primary'>${product.resell_price}</td>
+                                            <td className='bg-primary'>
+                                                {
+
+                                                    (product?.advertisement === true &&
+                                                        <>
+                                                            <button className='btn btn-xs btn-info'>activated</button>
+                                                        </>)
+                                                    ||
+                                                    <button onClick={() => handleAd(product._id)} className='btn btn-xs'>activate</button>
+
+                                                }
+                                            </td>
+                                            <td className='bg-primary'>
+
+                                                <button className='btn btn-xs btn-success'>available</button>
+                                            </td>
+                                            <td className='bg-primary' s> <label onClick={() => setDeletingProduct(product)} htmlFor="confirmation-modal" className="btn btn-xs btn-error">Delete</label></td>
+                                        </tr>)
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        {
+                            deletingProduct && <ConfirmationModal
+                                title={`Are you sure you want to delete?`}
+                                message={`If you delete ${deletingProduct.title}. It cannot be undone`}
+                                successAction={handleDeleteProduct}
+                                successButtonName='Delete'
+                                modalData={deletingProduct}
+                                closeModal={closeModal}
+                            ></ConfirmationModal>
+                        }
+                    </div >
+                    :
+                    <div className='flex justify-center items-center'>
+                        <h3 className="text-xl lg:text-4xl text-secondary font-semibold m-20" style={{ 'fontFamily': 'serif' }}>You have not added any products yet.</h3>
+                    </div>
             }
-        </div >
+        </div>
     );
 };
 
