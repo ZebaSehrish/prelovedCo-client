@@ -1,10 +1,12 @@
 import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider';
 
 const BookModal = ({ bookItem, setBookItem }) => {
     const { _id, img, title, resell_price } = bookItem;
     const { user } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const handleBooking = event => {
         event.preventDefault();
@@ -23,7 +25,7 @@ const BookModal = ({ bookItem, setBookItem }) => {
             number,
             location: location
         }
-        fetch('http://localhost:5000/bookings', {
+        fetch('https://preloved-co-server.vercel.app/bookings', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -36,7 +38,7 @@ const BookModal = ({ bookItem, setBookItem }) => {
                 if (data.acknowledged) {
                     setBookItem(null);
                     toast.success('Booking confirmed');
-                    //refetch();
+                    navigate('/dashboard/myOrders');
                 }
                 else {
                     toast.error(data.message);

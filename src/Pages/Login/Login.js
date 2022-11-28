@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider';
 import useToken from '../../hooks/useToken';
@@ -28,6 +29,7 @@ const Login = () => {
                 const user = res.user;
                 console.log(user);
                 setLoginUserEmail(data.email);
+                toast('User logged in successfully!')
 
             })
             .catch(error => {
@@ -36,6 +38,7 @@ const Login = () => {
             });
 
     }
+
 
     return (
         <div className='m-5 flex justify-center text-gray-500'>
@@ -77,7 +80,7 @@ const Login = () => {
                                 {loginError && <p>{loginError}</p>}
                             </div>
                             <div className="divider">OR</div>
-                            <input type="submit" value='Continue With Google' className='btn btn-outline w-full mt-3 ' />
+                            <Link to='/signup'><input type="submit" value='Continue With Google' className='btn btn-outline w-full mt-3 ' /></Link>
                         </form>
                     </div>
                 </div>

@@ -8,7 +8,7 @@ const CategoryDetails = () => {
     const [bookItem, setBookItem] = useState(null);
     const [categoryDetails, setCategoryDetails] = useState([]);
     useEffect(() => {
-        fetch(`http://localhost:5000/categoryDetails?category=${category}`)
+        fetch(`https://preloved-co-server.vercel.app/categoryDetails?category=${category}`)
             .then(res => res.json())
             .then(data => setCategoryDetails(data))
     }, [category])

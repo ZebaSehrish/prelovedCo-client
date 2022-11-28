@@ -1,14 +1,45 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { BsPinMap } from 'react-icons/bs';
 import { BiHeart } from 'react-icons/bi';
 import { BsExclamation } from 'react-icons/bs';
 import { GoVerified } from 'react-icons/go';
 import usePayment from '../../hooks/usePayment';
+import toast from 'react-hot-toast';
+import { AuthContext } from '../../contexts/AuthProvider';
+import { useNavigate } from 'react-router-dom';
 
 
 const CategoryDetail = ({ categoryDetail, setBookItem }) => {
     const [isPaid] = usePayment(CategoryDetail._id);
-    const { title, img, original_price, resell_price, year, date, location, seller, verified } = categoryDetail;
+    const { user } = useContext(AuthContext);
+    const { _id, title, img, category, original_price, resell_price, year, date, location, seller, verified } = categoryDetail;
+    const navigate = useNavigate();
+
+    const handleWishlist = _id => {
+        const wishlist = {
+            img,
+            bag: title,
+            category,
+            product_id: _id,
+            price: resell_price,
+            email: user?.email
+        }
+        fetch('https://preloved-co-server.vercel.app/wishlists', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+            },
+            body: JSON.stringify(wishlist)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                toast.success(`Added to wishlist`);
+                navigate('/dashboard/myOrders')
+            })
+    }
+
     return (
         <div>
             {
@@ -45,7 +76,7 @@ const CategoryDetail = ({ categoryDetail, setBookItem }) => {
                             <div className="card-actions w-full mb-3">
                                 <label htmlFor='booking-modal' className='btn btn-primary bg-gradient-to-r from-primary to-secondary text-white uppercase w-full'
                                     onClick={() => setBookItem(categoryDetail)} >Book Now</label>
-                                <button className="btn btn-outline text-primary w-full"> <BiHeart />Add to your wishlist</button>
+                                <button onClick={() => handleWishlist(_id)} className="btn btn-outline text-primary w-full"> <BiHeart />Add to your wishlist</button>
                                 <button className="btn btn-outline text-primary w-full"><BsExclamation />Report this Listing</button>
                             </div>
                         </div>

@@ -14,7 +14,7 @@ const MyProducts = () => {
         setDeletingProduct(null);
     }
 
-    const url = `http://localhost:5000/categoryDetails?email=${user?.email}`;
+    const url = `https://preloved-co-server.vercel.app/categoryDetails?email=${user?.email}`;
 
     const { data: products = [], isLoading, refetch } = useQuery({
         queryKey: ['products', user?.email],
@@ -31,7 +31,7 @@ const MyProducts = () => {
     })
 
     const handleDeleteProduct = product => {
-        fetch(`http://localhost:5000/categoryDetails/${product._id}`, {
+        fetch(`https://preloved-co-server.vercel.app/categoryDetails/${product._id}`, {
             method: 'DELETE',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -47,7 +47,7 @@ const MyProducts = () => {
     }
 
     const handleAd = id => {
-        fetch(`http://localhost:5000/users/seller/${id}`, {
+        fetch(`https://preloved-co-server.vercel.app/users/seller/${id}`, {
             method: 'PUT',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`

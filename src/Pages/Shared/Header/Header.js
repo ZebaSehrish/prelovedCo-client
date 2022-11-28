@@ -23,18 +23,18 @@ const Header = () => {
             <li><Link to='/'>Home</Link></li>
             <li><Link to='/blogs'>Blogs</Link></li>
             {
-                (user?.uid && !isAdmin && !isSeller &&
+                (user?.uid &&
                     <>
                         <li><Link to='/dashboard/myOrders'>Dashboard</Link></li>
                         <li><button onClick={handleLogOut}>Log Out</button></li>
-                        <li><Link><BiShoppingBag /></Link></li>
+
                     </>)
                 ||
                 (isAdmin &&
 
                     <>
                         <li><Link to='/dashboard/allSellers'>Dashboard</Link></li>
-                        <li><button onClick={handleLogOut}>Log Out</button></li>
+
                     </>
                 )
                 ||
@@ -42,12 +42,13 @@ const Header = () => {
 
                     <>
                         <li><Link to='/dashboard/myProducts'>Dashboard</Link></li>
-                        <li><button onClick={handleLogOut}>Log Out</button></li>
+
                     </>
                 )
                 ||
                 <>
                     <li><Link to='login'><AiOutlineUser />Login </Link></li>
+                    <li><Link><BiShoppingBag /></Link></li>
                 </>
             }
         </React.Fragment>

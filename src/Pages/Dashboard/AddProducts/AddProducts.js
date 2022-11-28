@@ -50,7 +50,7 @@ const AddProducts = () => {
 
 
                     //saving
-                    fetch('http://localhost:5000/categoryDetails', {
+                    fetch('https://preloved-co-server.vercel.app/categoryDetails', {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json',

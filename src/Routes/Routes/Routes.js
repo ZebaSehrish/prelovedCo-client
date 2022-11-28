@@ -10,6 +10,7 @@ import MyOrders from "../../Pages/Dashboard/MyOrders/MyOrders";
 import MyProducts from "../../Pages/Dashboard/MyProducts/MyProducts";
 import Payment from "../../Pages/Dashboard/Payment/Payment";
 import ReportedItems from "../../Pages/Dashboard/ReportedItems/ReportedItems";
+import Wishlist from "../../Pages/Dashboard/Wishlist/Wishlist";
 import Home from "../../Pages/Home/Home/Home";
 import DashboardLayout from "../../Pages/Layout/DashboardLayout";
 import Main from "../../Pages/Layout/Main";
@@ -51,7 +52,7 @@ export const router = createBrowserRouter([
             {
                 path: '/category/:id',
                 element: <PrivateRoute><CategoryDetails></CategoryDetails></PrivateRoute>,
-                loader: ({ params }) => fetch(`http://localhost:5000/categoryDetails/${params.id}`)
+                loader: ({ params }) => fetch(`https://preloved-co-server.vercel.app/categoryDetails/${params.id}`)
             },
 
         ],
@@ -71,9 +72,13 @@ export const router = createBrowserRouter([
                 element: <MyOrders></MyOrders>
             },
             {
+                path: '/dashboard/wishlist',
+                element: <Wishlist></Wishlist>
+            },
+            {
                 path: '/dashboard/payment/:id',
                 element: <Payment></Payment>,
-                loader: ({ params }) => fetch(`http://localhost:5000/bookings/${params.id}`)
+                loader: ({ params }) => fetch(`https://preloved-co-server.vercel.app/bookings/${params.id}`)
             },
             {
                 path: '/dashboard/allCustomers',

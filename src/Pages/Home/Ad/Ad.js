@@ -5,7 +5,7 @@ import AdItems from './AdItems';
 const Ad = () => {
     const [ad, setAd] = useState([]);
     useEffect(() => {
-        fetch(`http://localhost:5000/categoryDetails`)
+        fetch(`https://preloved-co-server.vercel.app/categoryDetails`)
             .then(res => res.json())
             .then(data => setAd(data))
     }, [])
@@ -13,7 +13,7 @@ const Ad = () => {
     const { data: payments, isLoading } = useQuery({
         queryKey: ['payment'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/bookingPaid');
+            const res = await fetch('https://preloved-co-server.vercel.app/bookingPaid');
             const data = await res.json();
             return data;
         }

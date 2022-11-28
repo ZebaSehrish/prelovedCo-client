@@ -14,14 +14,14 @@ const AllSellers = () => {
     const { data: users = [], refetch, isLoading } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/users?role=seller`)
+            const res = await fetch(`https://preloved-co-server.vercel.app/users?role=seller`)
             const data = await res.json();
             return data;
         }
     });
 
     const handleDeleteUser = user => {
-        fetch(`http://localhost:5000/users/${user._id}`, {
+        fetch(`https://preloved-co-server.vercel.app/users/${user._id}`, {
             method: 'DELETE',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -37,7 +37,7 @@ const AllSellers = () => {
     }
 
     const handleVerify = id => {
-        fetch(`http://localhost:5000/users/admin/${id}`, {
+        fetch(`https://preloved-co-server.vercel.app/users/admin/${id}`, {
             method: 'PUT',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`

@@ -27,7 +27,7 @@ const SignUp = () => {
             .then(res => {
                 const user = res.user;
                 console.log(user);
-                toast('User Created Successfully.')
+                toast.success('User Created Successfully.')
                 const userInfo = {
                     displayName: data.name,
                     role: data.role
@@ -47,11 +47,12 @@ const SignUp = () => {
 
     const googleProvider = new GoogleAuthProvider();
 
-    const handleGoogleSignIn = (data) => {
+    const handleGoogleSignIn = () => {
         providerLogin(googleProvider)
             .then(result => {
                 const user = result.user;
                 console.log(user);
+                toast.success('User Signed in Successfully.')
                 const userInfo = {
                     displayName: user?.displayName,
                     role: 'customer'
@@ -69,7 +70,7 @@ const SignUp = () => {
 
     const saveUser = (name, email, role) => {
         const user = { name, email, role };
-        fetch('http://localhost:5000/users', {
+        fetch('https://preloved-co-server.vercel.app/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
