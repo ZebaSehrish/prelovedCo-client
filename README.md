@@ -10,6 +10,8 @@ https://prelovedco-ed8e0.web.app/
 #### Sellers can add, delete,and put their products up for advertisement.
 
 #### Admins can view all users by their user category, verify and delete them.
+##### adminEmail : admin01@gmail.com
+##### adminPassword : Admin01*
 
 ### Technologies Used:
 #### HTML, CSS, Tailwind CSS, DaisyUI, React.js, Node.js, Express.js, MongoDB, Firebase, Stripe
